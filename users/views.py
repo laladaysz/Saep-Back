@@ -22,17 +22,3 @@ def cadastro(request):
     return Response({'nome': user.nome, 'email': user.email}, status=status.HTTP_201_CREATED)
 
 
-@api_view(['POST'])
-def login(request):
-    email = request.data.get('email')
-
-    # Verificar se o email foi fornecido
-    if not email:
-        return Response({'error': 'Email é obrigatório'}, status=status.HTTP_400_BAD_REQUEST)
-
-    # Verificar se o usuário existe
-    user = User.objects.filter(email=email).first()
-    if not user:
-        return Response({'error': 'Usuário não encontrado'}, status=status.HTTP_404_NOT_FOUND)
-
-    return Response({'message': f'Bem-vindo, {user.nome}'}, status=status.HTTP_200_OK)

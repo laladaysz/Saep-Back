@@ -28,9 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',  # Django Rest Framework
-    'users',            # Seu app de usuários
-    'corsheaders',      # Para lidar com CORS
+    'rest_framework',  
+    'users',            
+    'tarefa',
+    'corsheaders',      
 ]
 
 MIDDLEWARE = [
@@ -72,11 +73,11 @@ WSGI_APPLICATION = 'api_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'saep',         # Nome do banco
-        'USER': 'root',         # Usuário do MySQL
-        'PASSWORD': 'root',     # Senha do MySQL
-        'HOST': '127.0.0.1',    # Host do MySQL
-        'PORT': '3306',         # Porta do MySQL
+        'NAME': 'saep',         
+        'USER': 'root',         
+        'PASSWORD': 'root',    
+        'HOST': '127.0.0.1',    
+        'PORT': '3306',         
     }
 }
 
