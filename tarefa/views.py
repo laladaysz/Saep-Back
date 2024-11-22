@@ -12,3 +12,8 @@ def criar_tarefa(request):
         return Response(TarefaSerializer(tarefa).data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_all_tarefas(request):
+    tarefas = Tarefa.objects.all()
+    serializer = TarefaSerializer(tarefas, many=True)
+    return Response(serializer.data)
