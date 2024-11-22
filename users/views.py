@@ -25,6 +25,16 @@ def cadastro(request):
 
 @api_view(['GET'])
 def get_all_users(request):
-    users = User.objects.all()  # Consulta para obter todos os usuários
-    serializer = UserSerializer(users, many=True)  # Serializa os dados
-    return Response(serializer.data)  # Retorna os dados serializados
+    users = User.objects.all()  
+    serializer = UserSerializer(users, many=True)  
+    return Response(serializer.data)  
+
+
+@api_view(['GET'])
+def get_user_by_id(request, id):
+    try:
+        user = User.objects.get(id=id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({"error": "Usuário não encontrado"}, status=status.HTTP_404_NOT_FOUND)
