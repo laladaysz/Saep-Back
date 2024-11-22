@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import User
+from .serializers import UserSerializer
 
 @api_view(['POST'])
 def cadastro(request):
@@ -22,3 +23,8 @@ def cadastro(request):
     return Response({'nome': user.nome, 'email': user.email}, status=status.HTTP_201_CREATED)
 
 
+@api_view(['GET'])
+def get_all_users(request):
+    users = User.objects.all()  # Consulta para obter todos os usuários
+    serializer = UserSerializer(users, many=True)  # Serializa os dados
+    return Response(serializer.data)  # Retorna os dados serializados
