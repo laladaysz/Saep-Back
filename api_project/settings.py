@@ -73,13 +73,14 @@ WSGI_APPLICATION = 'api_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'saep',         
-        'USER': 'root',         
-        'PASSWORD': 'root',    
-        'HOST': '127.0.0.1',    
-        'PORT': '3306',         
+        'NAME': 'saep',
+        'USER': 'root',
+        'PASSWORD': 'root', #não uso senha pois uso conexao por xampp
+        'HOST': '127.0.0.1',
+        'PORT': '3308',
     }
 }
+
 
 
 # Password validation

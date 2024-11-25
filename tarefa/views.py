@@ -37,3 +37,27 @@ def update_status(request, id):
     # Serializa a tarefa atualizada
     serializer = TarefaSerializer(tarefa)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['DELETE'])
+def excluir_tarefa(request, pk):
+    try:
+        tarefa = Tarefa.objects.get(pk=pk)
+    except Tarefa.DoesNotExist:
+        return Response({"message": "Tarefa não encontrada!"}, status=status.HTTP_404_NOT_FOUND)
+
+    tarefa.delete()
+    return Response({"message": "Tarefa excluída com sucesso!"}, status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['PUT'])
+def atualizar_tarefa(request, pk):
+    try:
+        tarefa = Tarefa.objects.get(pk=pk)
+    except Tarefa.DoesNotExist:
+        return Response({"message": "Tarefa não encontrada!"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = TarefaSerializer(tarefa, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
