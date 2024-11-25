@@ -1,4 +1,0 @@
-django==5.1  # Ajuste para a versão correta do Django que você está utilizando
-djangorestframework==3.14.0  # Versão mais recente do DRF (ajuste se necessário)
-django-cors-headers==4.0.0  # Para lidar com CORS
-
