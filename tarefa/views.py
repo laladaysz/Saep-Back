@@ -52,12 +52,18 @@ def excluir_tarefa(request, pk):
 @api_view(['PUT'])
 def atualizar_tarefa(request, pk):
     try:
+        # Buscar a tarefa pelo ID
         tarefa = Tarefa.objects.get(pk=pk)
     except Tarefa.DoesNotExist:
         return Response({"message": "Tarefa não encontrada!"}, status=status.HTTP_404_NOT_FOUND)
 
+    # Criar o serializer para atualizar a tarefa
     serializer = TarefaSerializer(tarefa, data=request.data)
+
     if serializer.is_valid():
+        # Se os dados forem válidos, salvar a tarefa
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    # Se houver erro de validação, retornar os erros
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
